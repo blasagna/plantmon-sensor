@@ -1,0 +1,11 @@
+# IDE configs
+.vscode
+
+# mbed OS
+mbed-os
+
+# build outputs
+BUILD
+
+# python
+*.pyc
