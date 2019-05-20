@@ -20,7 +20,7 @@
 #include <mbed.h>
 #include "ble/BLE.h"
 #include "ble/Gap.h"
-// #include "ble/GattServer.h"
+#include "ble/GattServer.h"
 #include "ble/services/BatteryService.h"
 #include "ble/services/DeviceInformationService.h"
 
@@ -36,8 +36,29 @@ const static char SW_REV[] = "0.0.0";
 
 static EventQueue event_queue(/* event count */ 32 * EVENTS_EVENT_SIZE);
 
-// TODO: add PlantEnvironmentService class
+// TODO: complete PlantEnvironmentService class
 // chars: temp, humidity, light, soil moisture
+class PlantEnvironmentService {
+public:
+    typedef int16_t  TemperatureType_t;
+    typedef uint16_t HumidityType_t;
+    typedef uint8_t MoistureType_t;
+    typedef uint32_t LightType_t;
+
+    const static uint16_t PLANT_ENV_SERVICE_UUID = 0x0;
+
+    PlantEnvironmentService(BLE &ble) : _ble(ble) {
+
+    }
+private:
+    BLE &_ble;
+
+    TemperatureType_t _temperature;
+    HumidityType_t _humidity;
+    MoistureType_t _soil_moisture;
+    LightType_t _ambient_light;
+
+};
 
 class PlantMonitor : ble::Gap::EventHandler {
 public:
